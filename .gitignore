@@ -1,0 +1,9 @@
+# Игнорировать папку vendor и её содержимое (зависимости Composer)
+/vendor/
+composer.lock
+
+# Игнорировать файлы, созданные IDE
+.idea/
+.vscode/
+*.iml
+/.phpstorm.meta.php

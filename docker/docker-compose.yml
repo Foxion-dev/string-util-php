@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  phpunit:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../:/app
+    command: php ./vendor/bin/phpunit --testdox --colors=always --coverage-html coverage-report-html --bootstrap tests/bootstrap.php tests/

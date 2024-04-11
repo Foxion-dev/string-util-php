@@ -1,0 +1,26 @@
+{
+    "name":"foxdev/str-util-php",
+    "version":"1.0.0",
+    "type": "library",
+    "description": "PHP library for work with strings",
+    "keywords": ["strings"],
+    "authors": [
+        {
+            "name": "Bogdan Sazonov",
+            "email": "mamaama141996@gmail.com",
+            "homepage": "https://github.com/Foxion-dev"
+        }
+    ],
+    "require":{
+        "php":">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Foxdev\\": "src/",
+            "Foxdev\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    }
+}
