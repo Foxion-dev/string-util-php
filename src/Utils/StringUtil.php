@@ -5,158 +5,119 @@ namespace Foxdev\Utils;
 class StringUtil
 {
     /**
+     * @var string Хранит строку для манипуляции
+     */
+    private string $string;
+
+    /**
+     * Конструктор класса.
+     *
+     * @param string $string Инициализирующая строка.
+     */
+    public function __construct(string $string) {
+        $this->string = $string;
+    }
+
+    /**
+     * Возвращает текущую строку.
+     *
+     * @return string Текущая строка.
+     */
+    public function getString(): string
+    {
+        return $this->string;
+    }
+
+    /**
+     * Разделяет строку по заданному разделителю.
+     *
+     * @param string $delimiter Разделитель (по умолчанию пробел).
+     * @return array Массив строк, полученных разделением.
+     */
+    public function split(string $delimiter = ' '): array
+    {
+        return explode($delimiter, $this->string);
+    }
+
+    /**
+     * Разделяет строку, используя регулярное выражение.
+     *
+     * @param string $pattern Регулярное выражение для разделения.
+     * @return array Массив строк, полученных разделением.
+     */
+    public function splitByPattern(string $pattern): array
+    {
+        return preg_split($pattern, $this->string);
+    }
+
+    /**
+     * Удаляет все вхождения заданного слова из строки.
+     *
+     * @param string $word Слово для удаления.
+     * @return string Строка после удаления слов.
+     */
+    public function removeWords(string $word): string
+    {
+        return preg_replace("/\b" . preg_quote($word, '/') . "\b/", '', $this->string);
+    }
+
+    /**
+     * Удаляет все пробелы из строки.
+     *
+     * @return string Строка без пробелов.
+     */
+    public function removeSpaces(): string
+    {
+        return str_replace(' ', '', $this->string);
+    }
+
+    /**
      * Возвращает длину строки.
      *
-     * @param string $str Строка для определения длины.
      * @return int Длина строки.
      */
-    public static function strlen(string $str): int
+    public function strlen(): int
     {
-        return strlen($str);
+        return strlen($this->string);
     }
 
     /**
-     * Повторяет строку заданное количество раз.
+     * Возвращает строку в обратном порядке.
      *
-     * @param string $str Строка для повторения.
-     * @param int $times Количество повторений.
-     * @return string Результат повторения строки.
-     */
-    public static function copy(string $str, int $times): string
-    {
-        return str_repeat($str, $times);
-    }
-
-    /**
-     * Находит позицию первого вхождения подстроки в строке.
-     *
-     * @param string $haystack Строка для поиска.
-     * @param string $needle Подстрока, которую нужно найти.
-     * @return int|false Позиция первого вхождения подстроки или false.
-     */
-    public static function strpos(string $haystack, string $needle)
-    {
-        return strpos($haystack, $needle) ?: false;
-    }
-
-    /**
-     * Проверяет, начинается ли строка с заданной подстроки.
-     *
-     * @param string $haystack Строка для проверки.
-     * @param string $needle Подстрока для сравнения.
-     * @return bool Возвращает true, если строка начинается с подстроки, иначе false.
-     */
-    public static function startsWith(string $haystack, string $needle): bool
-    {
-        return strncmp($haystack, $needle, strlen($needle)) === 0;
-    }
-
-    /**
-     * Проверяет, заканчивается ли строка заданной подстрокой.
-     *
-     * @param string $haystack Строка для проверки.
-     * @param string $needle Подстрока для сравнения.
-     * @return bool Возвращает true, если строка заканчивается подстрокой, иначе false.
-     */
-    public static function endsWith(string $haystack, string $needle): bool
-    {
-        $length = strlen($needle);
-        if ($length === 0) {
-            return true;
-        }
-
-        return substr($haystack, -$length) === $needle;
-    }
-
-    /**
-     * Переворачивает строку.
-     *
-     * @param string $str Строка для переворачивания.
      * @return string Перевернутая строка.
      */
-    public static function reverse(string $str): string
+    public function reverse(): string
     {
-        return strrev($str);
+        return strrev($this->string);
     }
 
     /**
-     * Обрезает пробелы и другие символы с начала и конца строки.
+     * Удаляет пробелы с начала и конца строки.
      *
-     * @param string $str Строка для обработки.
-     * @return string Обработанная строка.
+     * @return string Обрезанная строка.
      */
-    public static function trim(string $str): string
+    public function trim(): string
     {
-        return trim($str);
+        return trim($this->string);
     }
 
     /**
-     * Преобразует строку в верхний регистр.
+     * Преобразует все символы строки в верхний регистр.
      *
-     * @param string $str Строка для преобразования.
      * @return string Строка в верхнем регистре.
      */
-    public static function toUpperCase(string $str): string
+    public function toUpperCase(): string
     {
-        return strtoupper($str);
+        return strtoupper($this->string);
     }
 
     /**
-     * Преобразует строку в нижний регистр.
+     * Преобразует все символы строки в нижний регистр.
      *
-     * @param string $str Строка для преобразования.
      * @return string Строка в нижнем регистре.
      */
-    public static function toLowerCase(string $str): string
+    public function toLowerCase(): string
     {
-        return strtolower($str);
-    }
-
-    /**
-     * Подсчитывает количество вхождений подстроки в строку.
-     *
-     * @param string $haystack Строка для поиска.
-     * @param string $needle Подстрока для подсчета.
-     * @return int Количество вхождений.
-     */
-    public static function substrCount(string $haystack, string $needle): int
-    {
-        return $needle ? substr_count($haystack, $needle) : 0;
-    }
-
-    /**
-     * Заменяет все вхождения подстроки на другую подстроку в строке.
-     *
-     * @param string $haystack Строка для замены.
-     * @param string $search Подстрока для поиска.
-     * @param string $replace Подстрока для замены.
-     * @return string Результат замены.
-     */
-    public static function replace(string $haystack, string $search, string $replace): string
-    {
-        return str_replace($search, $replace, $haystack);
-    }
-
-    /**
-     * Генерирует случайную строку заданной длины.
-     *
-     * @param int $length Длина генерируемой строки.
-     * @return string Случайная строка.
-     */
-    public static function random(int $length = 10): string
-    {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
-    }
-
-    /**
-     * Форматирует строку согласно заданному шаблону.
-     *
-     * @param string $format Шаблон форматирования.
-     * @param mixed ...$args Аргументы для форматирования.
-     * @return string Отформатированная строка.
-     */
-    public static function format(string $format, ...$args): string
-    {
-        return sprintf($format, ...$args);
+        return strtolower($this->string);
     }
 }
